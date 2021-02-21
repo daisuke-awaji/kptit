@@ -1,24 +1,23 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Container, Header, Content, Footer } from "rsuite";
+import "rsuite/lib/styles/index.less";
+import { MySpace, KPTBoard, FooterContent } from "./components";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Container>
+        <Header>
+          <h2>ふりかえり</h2>
+        </Header>
+        <Content>
+          <KPTBoard />
+          <MySpace />
+        </Content>
+        <Footer>
+          <FooterContent />
+        </Footer>
+      </Container>
     </div>
   );
 }
