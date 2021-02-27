@@ -3,7 +3,7 @@ import { Icon, IconButton, Tag } from "rsuite";
 
 export const DeletableTag = (props: {
   color?: string;
-  itemId: string;
+  id: string;
   handleTagRemove: any;
   children?: any;
 }) => {
@@ -20,7 +20,7 @@ export const DeletableTag = (props: {
     <Tag
       closable
       onClose={() => {
-        props.handleTagRemove(props.itemId);
+        props.handleTagRemove(props.id);
       }}
       color={props.color}
     >

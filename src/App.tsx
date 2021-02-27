@@ -2,6 +2,8 @@ import React from "react";
 import { Container, Header, Content, Footer } from "rsuite";
 import "rsuite/lib/styles/index.less";
 import { MySpace, KPTBoard, FooterContent } from "./components";
+import { DndProvider } from "react-dnd";
+import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   return (
@@ -11,8 +13,10 @@ function App() {
           <h2>ふりかえり</h2>
         </Header>
         <Content>
-          <KPTBoard />
-          <MySpace />
+          <DndProvider backend={HTML5Backend}>
+            <KPTBoard />
+            <MySpace />
+          </DndProvider>
         </Content>
         <Footer>
           <FooterContent />

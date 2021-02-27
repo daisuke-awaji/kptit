@@ -1,7 +1,11 @@
 import React, { useEffect } from "react";
 import { Col, Grid, Placeholder, Row } from "rsuite";
-import { Card } from ".";
+import { Card, ContributeUsers } from ".";
 import { kptData, KPTData, KPTItem } from "../data";
+import faker from "faker";
+
+faker.seed(8);
+faker.setLocale("ja");
 
 export const KPTRow = (props: { data: KPTItem[]; handleTagRemove: any }) => {
   const { data, handleTagRemove } = props;
@@ -10,12 +14,10 @@ export const KPTRow = (props: { data: KPTItem[]; handleTagRemove: any }) => {
     <>
       {data.map((d) => (
         <Card
-          key={d.itemId}
-          title={d.title}
-          tag={d.tag}
+          key={d.id}
           style={{ backgroundColor: "white", marginBottom: 10 }}
-          itemId={d.itemId}
           handleTagRemove={handleTagRemove}
+          {...d}
         />
       ))}
     </>
@@ -42,6 +44,7 @@ export const KPTBoard = () => {
           </Col>
         ))}
         <Col xs={24} sm={24} md={24} lg={6}>
+          <ContributeUsers />
           <Placeholder.Paragraph rows={30} />
         </Col>
       </Row>
