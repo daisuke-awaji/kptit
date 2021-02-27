@@ -1,7 +1,7 @@
 import React from "react";
 import { Container, Header, Content, Footer } from "rsuite";
 import "rsuite/lib/styles/index.less";
-import { MySpace, KPTBoard, FooterContent } from "./components";
+import { KPTBoard, FooterContent } from "./components";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 
@@ -15,7 +15,7 @@ function App() {
         <Content>
           <DndProvider backend={HTML5Backend}>
             <KPTBoard />
-            <MySpace />
+            {/* <MySpace /> */}
           </DndProvider>
         </Content>
         <Footer>

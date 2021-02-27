@@ -1,48 +1,47 @@
-import React, { useEffect } from "react";
+import React, { useCallback } from "react";
 import { Col, Grid, Placeholder, Row } from "rsuite";
-import { Card, ContributeUsers } from ".";
-import { kptData, KPTData, KPTItem } from "../data";
-import faker from "faker";
-
-faker.seed(8);
-faker.setLocale("ja");
-
-export const KPTRow = (props: { data: KPTItem[]; handleTagRemove: any }) => {
-  const { data, handleTagRemove } = props;
-  if (!data.length) return null;
-  return (
-    <>
-      {data.map((d) => (
-        <Card
-          key={d.id}
-          style={{ backgroundColor: "white", marginBottom: 10 }}
-          handleTagRemove={handleTagRemove}
-          {...d}
-        />
-      ))}
-    </>
-  );
-};
+import { ContributeUsers } from ".";
+import { kptData, GroupTypes, MoveHandler } from "../data";
+import useGroupedItems from "../hooks/useGroupedItems";
+import { Group } from "./Group";
 
 export const KPTBoard = () => {
-  const [data, setData] = React.useState<KPTData[]>([]);
-  useEffect(() => {
-    setData(kptData);
-  }, []);
+  const [groupedItems, items, setItems] = useGroupedItems(kptData);
 
-  const handleTagRemove = (removedTagItemId: string) => {
-    console.log(removedTagItemId);
-  };
+  const moveItem: MoveHandler = useCallback(
+    (dragIndex, targetIndex, group) => {
+      const item = items[dragIndex];
+      if (!item) return;
+      setItems((prevState) => {
+        const newItems = prevState.filter((_, idx) => idx !== dragIndex);
+        newItems.splice(targetIndex, 0, { ...item, group });
+        return newItems;
+      });
+    },
+    [items, setItems]
+  );
 
+  let index = 0;
   return (
     <Grid fluid>
       <Row className="show-grid">
-        {data.map((d) => (
-          <Col xs={8} sm={8} md={8} lg={6} key={d.categoryId}>
-            <h4>{d.categoryName}</h4>
-            <KPTRow data={d.data} handleTagRemove={handleTagRemove} />
-          </Col>
-        ))}
+        {GroupTypes.map((group) => {
+          const items = groupedItems[group];
+          const firstIndex = index;
+          if (items === undefined) return null;
+          index = index + items.length;
+
+          return (
+            <Col key={group} xs={8} sm={8} md={8} lg={6}>
+              <Group
+                items={items}
+                groupType={group}
+                firstIndex={firstIndex}
+                onMove={moveItem}
+              />
+            </Col>
+          );
+        })}
         <Col xs={24} sm={24} md={24} lg={6}>
           <ContributeUsers />
           <Placeholder.Paragraph rows={30} />
