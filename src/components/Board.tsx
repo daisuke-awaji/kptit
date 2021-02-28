@@ -21,6 +21,32 @@ export const KPTBoard = () => {
     [items, setItems]
   );
 
+  const removeTag = (id: string) => {
+    console.log(id);
+
+    setItems((prevState) => {
+      const newState = prevState.map((item) => {
+        if (item.id === id) {
+          return { ...item, tag: undefined };
+        }
+        return item;
+      });
+      return newState;
+    });
+  };
+
+  const confirmTagInput = (id: string, inputValue: string) => {
+    setItems((prevState) => {
+      const newState = prevState.map((item) => {
+        if (item.id === id) {
+          return { ...item, tag: { value: inputValue, color: "red" } };
+        }
+        return item;
+      });
+      return newState;
+    });
+  };
+
   let index = 0;
   return (
     <Grid fluid>
@@ -38,6 +64,8 @@ export const KPTBoard = () => {
                 groupType={group}
                 firstIndex={firstIndex}
                 onMove={moveItem}
+                handleTagRemove={removeTag}
+                handleInputConfirm={confirmTagInput}
               />
             </Col>
           );

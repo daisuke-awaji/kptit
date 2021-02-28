@@ -151,4 +151,28 @@ export const kptData: Item[] = [
       lastName: faker.name.firstName() + faker.name.lastName(),
     },
   },
+  {
+    id: faker.random.uuid(),
+    group: "problem",
+    type: "item",
+    insertDatetime: faker.date.between(
+      new Date("2020-01-01"),
+      new Date("2021-12-31")
+    ),
+    contents: {
+      title: "飲み会が多い",
+    },
+    tag: {
+      color: "yellow",
+      value: "食生活",
+    },
+    author: {
+      id: faker.random.uuid(),
+      image: `https://randomuser.me/api/portraits/${faker.helpers.randomize([
+        "women",
+        "men",
+      ])}/${faker.random.number(60)}.jpg`,
+      lastName: faker.name.firstName() + faker.name.lastName(),
+    },
+  },
 ];

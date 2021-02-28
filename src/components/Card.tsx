@@ -34,6 +34,7 @@ export const Card = (props: PanelProps & Item) => {
         <DeletableTag
           id={props.id}
           handleTagRemove={props.handleTagRemove}
+          handleInputConfirm={props.handleInputConfirm}
           color={props.tag?.color}
         >
           {props.tag?.value}
@@ -62,15 +63,6 @@ export const Card = (props: PanelProps & Item) => {
             <IconButton
               circle
               appearance="subtle"
-              icon={<Icon size="lg" icon="flag" />}
-            />
-            {props.insertDatetime.getMonth() +
-              1 +
-              "/" +
-              props.insertDatetime.getDate()}
-            <IconButton
-              circle
-              appearance="subtle"
               icon={<Icon size="lg" icon="comment" />}
             />
             {props.comments ? props.comments.length : 0}
@@ -80,7 +72,6 @@ export const Card = (props: PanelProps & Item) => {
               icon={<Icon size="lg" icon="thumbs-o-up" />}
             />
             {props.likes ? props.likes.length : 0}
-            {coordinate.y}
           </div>
         </div>
       </Panel>

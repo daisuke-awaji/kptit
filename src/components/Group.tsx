@@ -16,7 +16,16 @@ export const Group: React.FC<{
   groupType: GroupType;
   firstIndex: number;
   onMove: MoveHandler;
-}> = ({ items, groupType, firstIndex, onMove }) => {
+  handleTagRemove: any;
+  handleInputConfirm: any;
+}> = ({
+  items,
+  groupType,
+  firstIndex,
+  onMove,
+  handleTagRemove,
+  handleInputConfirm,
+}) => {
   const [, ref] = useDrop({
     accept: ItemTypes,
     hover(dragItem: ItemWithIndex) {
@@ -37,18 +46,18 @@ export const Group: React.FC<{
   return (
     <div ref={ref}>
       <h5>{TitleMap[groupType]}</h5>
-      <div style={{ height: 100, borderBottom: "1" }}>
-        {items.map((item, i) => {
-          return (
-            <Draggable item={item} index={firstIndex + i} onMove={onMove}>
-              <Card
-                style={{ backgroundColor: "white", marginBottom: 10 }}
-                {...item}
-              />
-            </Draggable>
-          );
-        })}
-      </div>
+      {items.map((item, i) => {
+        return (
+          <Draggable item={item} index={firstIndex + i} onMove={onMove}>
+            <Card
+              style={{ backgroundColor: "white", marginBottom: 10 }}
+              handleTagRemove={handleTagRemove}
+              handleInputConfirm={handleInputConfirm}
+              {...item}
+            />
+          </Draggable>
+        );
+      })}
     </div>
   );
 };

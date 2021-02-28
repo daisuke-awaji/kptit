@@ -10,7 +10,7 @@ function App() {
     <div className="app">
       <Container>
         <Header>
-          <h2>ふりかえり</h2>
+          <h2>kpt it!</h2>
         </Header>
         <Content>
           <DndProvider backend={HTML5Backend}>
