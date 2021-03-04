@@ -1,3 +1,3 @@
 export const FooterContent = () => {
-  return <div></div>;
+  return <div style={{ height: "100px" }}></div>;
 };

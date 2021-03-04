@@ -151,6 +151,7 @@ export const kptData: Item[] = [
       lastName: faker.name.firstName() + faker.name.lastName(),
     },
   },
+
   {
     id: faker.random.uuid(),
     group: "problem",
@@ -165,6 +166,56 @@ export const kptData: Item[] = [
     tag: {
       color: "yellow",
       value: "食生活",
+    },
+    author: {
+      id: faker.random.uuid(),
+      image: `https://randomuser.me/api/portraits/${faker.helpers.randomize([
+        "women",
+        "men",
+      ])}/${faker.random.number(60)}.jpg`,
+      lastName: faker.name.firstName() + faker.name.lastName(),
+    },
+  },
+
+  {
+    id: faker.random.uuid(),
+    group: "problem",
+    type: "item",
+    insertDatetime: faker.date.between(
+      new Date("2020-01-01"),
+      new Date("2021-12-31")
+    ),
+    contents: {
+      title: "残業しすぎだ・・・",
+    },
+    tag: {
+      color: "green",
+      value: "会社",
+    },
+    author: {
+      id: faker.random.uuid(),
+      image: `https://randomuser.me/api/portraits/${faker.helpers.randomize([
+        "women",
+        "men",
+      ])}/${faker.random.number(60)}.jpg`,
+      lastName: faker.name.firstName() + faker.name.lastName(),
+    },
+  },
+
+  {
+    id: faker.random.uuid(),
+    group: "try",
+    type: "item",
+    insertDatetime: faker.date.between(
+      new Date("2020-01-01"),
+      new Date("2021-12-31")
+    ),
+    contents: {
+      title: "ランニング距離を２km増やしてみよう",
+    },
+    tag: {
+      color: "red",
+      value: "運動",
     },
     author: {
       id: faker.random.uuid(),

@@ -7,7 +7,7 @@ import { HTML5Backend } from "react-dnd-html5-backend";
 
 function App() {
   return (
-    <div className="app">
+    <div className="app" style={{ height: "100vh", overflow: "auto" }}>
       <Container>
         <Header>
           <h2>kpt it!</h2>

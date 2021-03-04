@@ -1,7 +1,9 @@
+import faker from "faker";
 import React, { useCallback } from "react";
-import { Col, Grid, Placeholder, Row } from "rsuite";
+import { Button, Col, Grid, Placeholder, Row } from "rsuite";
 import { ContributeUsers } from ".";
-import { kptData, GroupTypes, MoveHandler } from "../data";
+import { kptData, GroupTypes, MoveHandler, Item, GroupType } from "../data";
+import { me } from "../data/me";
 import useGroupedItems from "../hooks/useGroupedItems";
 import { Group } from "./Group";
 
@@ -47,6 +49,49 @@ export const KPTBoard = () => {
     });
   };
 
+  const createNewCard = (group: GroupType) => {
+    const newItem: Item & { focus: boolean } = {
+      id: faker.random.uuid(),
+      type: "item",
+      contents: {
+        title: "",
+        memo: "",
+      },
+      group,
+      author: me,
+      insertDatetime: new Date(),
+      focus: true,
+    };
+
+    setItems((prevState) => [...prevState, newItem]);
+  };
+
+  const removeItem = (id: string) => {
+    setItems((prevState) => {
+      return prevState.filter((i) => i.id !== id);
+    });
+  };
+
+  const handleLike = (id: string) => {
+    setItems((prevState) => {
+      return prevState.map((item) => {
+        if (item.id === id) {
+          const myLike = {
+            id: faker.random.uuid(),
+            kptItemId: id,
+            userId: me.id,
+          };
+          if (item.likes?.length) {
+            item.likes = [...item.likes, myLike];
+          } else {
+            item.likes = [myLike];
+          }
+        }
+        return item;
+      });
+    });
+  };
+
   let index = 0;
   return (
     <Grid fluid>
@@ -64,9 +109,18 @@ export const KPTBoard = () => {
                 groupType={group}
                 firstIndex={firstIndex}
                 onMove={moveItem}
+                onRemove={removeItem}
+                handleLike={handleLike}
                 handleTagRemove={removeTag}
                 handleInputConfirm={confirmTagInput}
               />
+              <Button
+                appearance="default"
+                block
+                onClick={() => createNewCard(group)}
+              >
+                + NEW
+              </Button>
             </Col>
           );
         })}

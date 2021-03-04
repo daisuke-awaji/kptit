@@ -16,6 +16,8 @@ export const Group: React.FC<{
   groupType: GroupType;
   firstIndex: number;
   onMove: MoveHandler;
+  onRemove: any;
+  handleLike: any;
   handleTagRemove: any;
   handleInputConfirm: any;
 }> = ({
@@ -23,6 +25,8 @@ export const Group: React.FC<{
   groupType,
   firstIndex,
   onMove,
+  onRemove,
+  handleLike,
   handleTagRemove,
   handleInputConfirm,
 }) => {
@@ -50,7 +54,8 @@ export const Group: React.FC<{
         return (
           <Draggable item={item} index={firstIndex + i} onMove={onMove}>
             <Card
-              style={{ backgroundColor: "white", marginBottom: 10 }}
+              handleRemove={onRemove}
+              handleLike={handleLike}
               handleTagRemove={handleTagRemove}
               handleInputConfirm={handleInputConfirm}
               {...item}
