@@ -103,7 +103,7 @@ export const KPTBoard = () => {
           index = index + items.length;
 
           return (
-            <Col key={group} xs={8} sm={8} md={8} lg={6}>
+            <Col key={group} xs={24} sm={8} md={8} lg={6}>
               <Group
                 items={items}
                 groupType={group}
