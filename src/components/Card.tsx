@@ -55,6 +55,7 @@ export const Card = (props: PanelProps & Item & { focus?: boolean }) => {
         </div>
         <h6
           contentEditable="true"
+          placeholder="Type a name..."
           style={{
             minHeight: "30px",
             marginTop: 10,

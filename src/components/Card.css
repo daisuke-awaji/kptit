@@ -1,5 +1,7 @@
 [contenteditable="true"]:empty:before {
   content: attr(placeholder);
+  font-weight: 10;
+  text-decoration-color: #aaa;
   pointer-events: none;
   display: block; /* For Firefox */
 }
